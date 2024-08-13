@@ -1,0 +1,25 @@
+{
+    "categories": [
+        {
+            "name": "CSPM Executive Dashboard",
+            "widgets": [
+                { "name": "Widget 1", "text": "Sample Text 1", "visible": true },
+                { "name": "Widget 2", "text": "Sample Text 2", "visible": true }
+            ]
+        },
+        {
+            "name": "CWPP Dashboard",
+            "widgets": [
+                { "name": "Widget A", "text": "Sample Text A", "visible": true },
+                { "name": "Widget B", "text": "Sample Text B", "visible": true }
+            ]
+        },
+        {
+            "name": "Registry Scan",
+            "widgets": [
+                { "name": "Widget x", "text": "Sample Text x", "visible": true },
+                { "name": "Widget y", "text": "Sample Text y", "visible": true }
+            ]
+        }
+    ]
+}
