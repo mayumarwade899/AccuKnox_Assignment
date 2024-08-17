@@ -14,7 +14,7 @@ function Widget({ category, widget }) {
     <div className="widget">
       <div className="widget-header">
         <FaTimes className="remove-icon" onClick={handleRemove} />
-        <h4>{widget.name}</h4>
+        <h4 className="widget-name">{widget.name}</h4>
       </div>
       <p>{widget.text}</p>
     </div>

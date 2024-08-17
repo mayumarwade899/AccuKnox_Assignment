@@ -6,7 +6,6 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <h1>Dashboard</h1>
         <Dashboard />
       </div>
     </Provider>

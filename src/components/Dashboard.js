@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Widget from "./Widget";
 import { addWidget, removeWidget } from "../redux/actions";
 import Modal from "react-modal";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 
 Modal.setAppElement("#root");
 
@@ -61,99 +61,109 @@ function Dashboard() {
   return (
     <div>
       <div className="top-bar">
-        <input
-          type="text"
-          placeholder="Search widget..."
-          value={search}
-          onChange={handleSearch}
-          className="search-bar"
-        />
-        <div className="side-section">
-          <button className="add-widget-button" onClick={openModal}>
-            + AddWidget
-          </button>
-          <FiMenu className="menu-icon" onClick={toggleSidebar} />
+        <h5>Dashboard V2</h5>
+        <div>
+          <input
+            type="text"
+            placeholder="Search widget..."
+            value={search}
+            onChange={handleSearch}
+            className="search-bar"
+          />
         </div>
       </div>
 
-      {categories.map((category) => (
-        <div key={category.name} className="category">
-          <h3>{category.name}</h3>
-          <div className="widgets">
-            {category.widgets
-              .filter(
-                (widget) =>
-                  widget.name.toLowerCase().includes(search)
-              )
-              .map((widget) => (
-                <Widget
-                  key={widget.name}
-                  category={category.name}
-                  widget={widget}
-                />
-              ))}
-            <div className="widget add-widget-card" onClick={openModal}>
-              <div className="add-widget-card-content">+ Add Widget</div>
-            </div>
+      <div className="dashboard-section">
+        <div className="dashboard-top-section">
+          <h3>CNAPP Dashboard</h3>
+          <div className="side-section">
+            <button className="add-widget-button" onClick={openModal}>
+              Add Widget +
+            </button>
+            <button className="add-widget-button" onClick={toggleSidebar}>
+              Category Section
+            </button>
           </div>
         </div>
-      ))}
 
-      {isSidebarOpen && (
-        <div className="sidebar">
-          <FiX className="close-icon" onClick={toggleSidebar} />
-          <h2>Manage Widgets</h2>
-          {categories.map((category) => (
-            <div key={category.name} className="sidebar-category">
-              <h4>{category.name}</h4>
-              {category.widgets.map((widget) => (
-                <div key={widget.name} className="sidebar-widget">
-                  <input
-                    type="checkbox"
-                    checked={category.widgets.some(w => w.name === widget.name)}
-                    onChange={() =>
-                      handleToggleWidget(category.name, widget.name)
-                    }
+        {categories.map((category) => (
+          <div key={category.name} className="category">
+            <h3>{category.name}</h3>
+            <div className="widgets">
+              {category.widgets
+                .filter((widget) => widget.name.toLowerCase().includes(search))
+                .map((widget) => (
+                  <Widget
+                    key={widget.name}
+                    category={category.name}
+                    widget={widget}
                   />
-                  <label>{widget.name}</label>
-                </div>
-              ))}
+                ))}
+              <div className="widget add-widget-card" onClick={openModal}>
+                <div className="add-widget-card-content">+ Add Widget</div>
+              </div>
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+        ))}
 
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        contentLabel="Add Widget Modal"
-        className="modal"
-        overlayClassName="modal-overlay"
-      >
-        <h2>Add New Widget</h2>
-        <form onSubmit={handleSubmit} className="modal-form">
-          <input
-            type="text"
-            name="name"
-            placeholder="Widget Name"
-            value={newWidget.name}
-            onChange={handleInputChange}
-            required
-          />
-          <input
-            type="text"
-            name="text"
-            placeholder="Widget Text"
-            value={newWidget.text}
-            onChange={handleInputChange}
-            required
-          />
-          <button type="submit">Add Widget</button>
-          <button type="button" onClick={closeModal} className="modal-close">
-            Cancel
-          </button>
-        </form>
-      </Modal>
+        {isSidebarOpen && (
+          <div className="sidebar">
+            <FiX className="close-icon" onClick={toggleSidebar} />
+            <h2>Manage Widgets</h2>
+            {categories.map((category) => (
+              <div key={category.name} className="sidebar-category">
+                <h4>{category.name}</h4>
+                {category.widgets.map((widget) => (
+                  <div key={widget.name} className="sidebar-widget">
+                    <input
+                      type="checkbox"
+                      checked={category.widgets.some(
+                        (w) => w.name === widget.name
+                      )}
+                      onChange={() =>
+                        handleToggleWidget(category.name, widget.name)
+                      }
+                    />
+                    <label>{widget.name}</label>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
+
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={closeModal}
+          contentLabel="Add Widget Modal"
+          className="modal"
+          overlayClassName="modal-overlay"
+        >
+          <h2>Add New Widget</h2>
+          <form onSubmit={handleSubmit} className="modal-form">
+            <input
+              type="text"
+              name="name"
+              placeholder="Widget Name"
+              value={newWidget.name}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="text"
+              name="text"
+              placeholder="Widget Text"
+              value={newWidget.text}
+              onChange={handleInputChange}
+              required
+            />
+            <button type="submit">Add Widget</button>
+            <button type="button" onClick={closeModal} className="modal-close">
+              Cancel
+            </button>
+          </form>
+        </Modal>
+      </div>
     </div>
   );
 }
