@@ -72,6 +72,7 @@ body {
   border: 1px solid #ecf0f1;
   border-radius: 8px;
   padding: 10px;
+  height: 145px;
   width: 270px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -201,6 +202,25 @@ body {
   font-size: 2rem;
   color: #2c3e50;
   cursor: pointer;
+}
+
+.selector {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.selector:hover {
+  border-color: #007bff;
 }
 
 .sidebar {

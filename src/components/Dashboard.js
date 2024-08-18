@@ -14,6 +14,7 @@ function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [newWidget, setNewWidget] = useState({ name: "", text: "" });
+  const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
 
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
@@ -39,10 +40,14 @@ function Dashboard() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (newWidget.name && newWidget.text) {
-      dispatch(addWidget(categories[0].name, newWidget));
+    if (newWidget.name && newWidget.text && selectedCategory) {
+      dispatch(addWidget(selectedCategory, newWidget));
       closeModal();
     }
+  };
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
   };
 
   return (
@@ -93,7 +98,7 @@ function Dashboard() {
           </div>
         ))}
 
-        <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>
+        <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
         <Modal
           isOpen={isModalOpen}
@@ -104,6 +109,18 @@ function Dashboard() {
         >
           <h2>Add New Widget</h2>
           <form onSubmit={handleSubmit} className="modal-form">
+            <select
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              className="selector"
+              
+            >
+              {categories.map((category) => (
+                <option key={category.name} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
             <input
               type="text"
               name="name"
