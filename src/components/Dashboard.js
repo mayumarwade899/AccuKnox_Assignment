@@ -48,7 +48,7 @@ function Dashboard() {
   return (
     <div>
       <div className="top-bar">
-        <h5>Dashboard V2</h5>
+        <h4>Dashboard V2</h4>
         <div>
           <input
             type="text"
@@ -64,10 +64,10 @@ function Dashboard() {
         <div className="dashboard-top-section">
           <h3>CNAPP Dashboard</h3>
           <div className="side-section">
-            <button className="add-widget-button" onClick={openModal}>
+            <button className="side-button" onClick={openModal}>
               Add Widget +
             </button>
-            <button className="add-widget-button" onClick={toggleSidebar}>
+            <button className="side-button" onClick={toggleSidebar}>
               Category Section
             </button>
           </div>
