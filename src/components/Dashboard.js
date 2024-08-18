@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Widget from "./Widget";
-import { addWidget, removeWidget } from "../redux/actions";
+import { addWidget } from "../redux/actions";
 import Modal from "react-modal";
-import { FiX } from "react-icons/fi";
+import Sidebar from "./Sidebar";
 
 Modal.setAppElement("#root");
 
@@ -42,19 +42,6 @@ function Dashboard() {
     if (newWidget.name && newWidget.text) {
       dispatch(addWidget(categories[0].name, newWidget));
       closeModal();
-    }
-  };
-
-  const handleToggleWidget = (categoryName, widgetName) => {
-    const category = categories.find((cat) => cat.name === categoryName);
-    const widget = category.widgets.find((wid) => wid.name === widgetName);
-
-    if (widget) {
-      dispatch(removeWidget(categoryName, widgetName));
-    } else {
-      dispatch(
-        addWidget(categoryName, { name: widgetName, text: "Placeholder text" })
-      );
     }
   };
 
@@ -106,31 +93,7 @@ function Dashboard() {
           </div>
         ))}
 
-        {isSidebarOpen && (
-          <div className="sidebar">
-            <FiX className="close-icon" onClick={toggleSidebar} />
-            <h2>Manage Widgets</h2>
-            {categories.map((category) => (
-              <div key={category.name} className="sidebar-category">
-                <h4>{category.name}</h4>
-                {category.widgets.map((widget) => (
-                  <div key={widget.name} className="sidebar-widget">
-                    <input
-                      type="checkbox"
-                      checked={category.widgets.some(
-                        (w) => w.name === widget.name
-                      )}
-                      onChange={() =>
-                        handleToggleWidget(category.name, widget.name)
-                      }
-                    />
-                    <label>{widget.name}</label>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        )}
+        <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>
 
         <Modal
           isOpen={isModalOpen}
